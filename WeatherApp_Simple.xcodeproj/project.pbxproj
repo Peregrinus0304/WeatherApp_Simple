@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		456228C5250A941F00D7E45B /* WeatherGetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456228C4250A941F00D7E45B /* WeatherGetterModel.swift */; };
 		45AC16C725095CE90008F0D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16C625095CE90008F0D1 /* AppDelegate.swift */; };
 		45AC16C925095CE90008F0D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16C825095CE90008F0D1 /* SceneDelegate.swift */; };
 		45AC16CB25095CE90008F0D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16CA25095CE90008F0D1 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		2518BCBC7961A35B5EDF494D /* Pods_WeatherApp_Simple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp_Simple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30461DA4955E44CA6D6866A0 /* Pods-WeatherApp_Simple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp_Simple.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp_Simple/Pods-WeatherApp_Simple.release.xcconfig"; sourceTree = "<group>"; };
+		456228C4250A941F00D7E45B /* WeatherGetterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherGetterModel.swift; sourceTree = "<group>"; };
 		45AC16C325095CE90008F0D1 /* WeatherApp_Simple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp_Simple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45AC16C625095CE90008F0D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45AC16C825095CE90008F0D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				45AC16CA25095CE90008F0D1 /* ViewController.swift */,
 				45AC16CC25095CE90008F0D1 /* Main.storyboard */,
 				45AC16DC250A8D070008F0D1 /* SearchViewController.swift */,
+				456228C4250A941F00D7E45B /* WeatherGetterModel.swift */,
 				45AC16DA25095D1B0008F0D1 /* CustomButton.swift */,
 				45AC16CF25095CEE0008F0D1 /* Assets.xcassets */,
 				45AC16D125095CEE0008F0D1 /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 				45AC16CB25095CE90008F0D1 /* ViewController.swift in Sources */,
 				45AC16C725095CE90008F0D1 /* AppDelegate.swift in Sources */,
 				45AC16C925095CE90008F0D1 /* SceneDelegate.swift in Sources */,
+				456228C5250A941F00D7E45B /* WeatherGetterModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
