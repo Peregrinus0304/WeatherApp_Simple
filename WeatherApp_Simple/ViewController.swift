@@ -10,19 +10,40 @@ import UIKit
 import GooglePlaces
 
 class ViewController: UIViewController {
+   
+    
 
     //MARK: - Outlets
+    
     @IBOutlet weak var searchButton: CustomButton!
     
+    @IBOutlet weak var cityLabel: UILabel!
     
+    @IBOutlet weak var weatherLabel: UILabel!
+    
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
+    
+    
+    var weather: WeatherGetter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      let weather = WeatherGetter()
-        weather.getWeather(city: "Warsaw")
+    weather = WeatherGetter(delegate: self)
+        
+        
+    // Initialize UI
+         cityLabel.text = "simple weather"
+         weatherLabel.text = ""
+         temperatureLabel.text = ""
         
     }
 
+ 
+    
+    
+    //MARK: - AutocompleteVC logic
+    
     // Present the Autocomplete view controller when the button is pressed.
     func autocompleteClicked(_ sender: UIButton) {
       let autocompleteController = GMSAutocompleteViewController()
@@ -45,8 +66,27 @@ class ViewController: UIViewController {
     @IBAction func searchPressed(_ sender: CustomButton) {
         sender.animate()
         autocompleteClicked(sender)
+        weather.getWeatherByCity(city: "Warsaw".urlEncoded)
     }
     
+    func showSimpleAlert(title: String, message: String) {
+      let alert = UIAlertController(
+        title: title,
+        message: message,
+        preferredStyle: .alert
+      )
+      let okAction = UIAlertAction(
+        title: "OK",
+        style:  .default,
+        handler: nil
+      )
+      alert.addAction(okAction)
+        present(
+        alert,
+        animated: true,
+        completion: nil
+      )
+    }
 }
 
 //MARK: - AutocompleteViewController Delegate
@@ -81,3 +121,37 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
   }
 
 }
+
+//MARK: - WeatherGetter Delegate
+
+extension ViewController: WeatherGetterDelegate {
+    func didGetWeather(weather: Weather) {
+ DispatchQueue.main.async {
+             self.cityLabel.text = weather.city
+             self.weatherLabel.text = weather.weatherDescription
+             self.temperatureLabel.text = "\(Int(round(weather.tempCelsius)))°"
+       }
+    }
+       
+       func didNotGetWeather(error: NSError) {
+         DispatchQueue.main.async {
+             self.showSimpleAlert(title: "Can't get the weather",
+                                  message: "The weather service isn't responding.")
+           
+           print("didNotGetWeather error: \(error)")
+       }
+    }
+}
+
+  extension String {
+    
+    // A handy method for %-encoding strings containing spaces and other
+    // characters that need to be converted for use in URLs.
+    var urlEncoded: String {
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+    }
+    
+  }
+
+ 
+ 
