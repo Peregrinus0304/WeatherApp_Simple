@@ -66,6 +66,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jZA-5a-QdT">
+                                <rect key="frame" x="118" y="44" width="158" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="6HE-Xc-Axq"/>
+                                    <constraint firstAttribute="width" constant="158" id="KEQ-Uj-coj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -81,19 +88,22 @@
                             <constraint firstItem="fFt-LH-fVV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="98" id="MxH-y3-Oiw"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="16V-RF-uKx" secondAttribute="bottom" id="W6b-y5-wlE"/>
                             <constraint firstItem="wIa-lA-Sch" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="121" id="Zmx-C6-7MR"/>
+                            <constraint firstItem="jZA-5a-QdT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="Znz-at-gVK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vx-Xd-oMv" secondAttribute="trailing" id="aqH-IM-epZ"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="447" id="lzp-GW-ZaB"/>
                             <constraint firstItem="qGy-7f-ahN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="121" id="mGK-8G-R94"/>
                             <constraint firstItem="16V-RF-uKx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mP0-zj-8k2"/>
                             <constraint firstItem="qGy-7f-ahN" firstAttribute="top" secondItem="fFt-LH-fVV" secondAttribute="bottom" constant="22" id="qTk-Gf-JPS"/>
                             <constraint firstItem="wIa-lA-Sch" firstAttribute="top" secondItem="qGy-7f-ahN" secondAttribute="bottom" constant="23" id="vi3-Ok-yeV"/>
+                            <constraint firstItem="jZA-5a-QdT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zCd-fT-GKm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="fFt-LH-fVV" id="kdc-fo-eei"/>
-                        <outlet property="searchButton" destination="2Vx-Xd-oMv" id="nx9-Sg-tTd"/>
+                        <outlet property="searchButton" destination="2Vx-Xd-oMv" id="CwE-wH-sOc"/>
                         <outlet property="temperatureLabel" destination="wIa-lA-Sch" id="ury-QC-zkh"/>
+                        <outlet property="weatherImageView" destination="jZA-5a-QdT" id="VCW-hl-IxC"/>
                         <outlet property="weatherLabel" destination="qGy-7f-ahN" id="mdc-Uw-BTb"/>
                     </connections>
                 </viewController>

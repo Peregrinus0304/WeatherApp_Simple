@@ -25,21 +25,15 @@ class CustomButton: UIButton {
     }
 
     func animate() {
-        let shake            = CABasicAnimation(keyPath: "position")
-        shake.duration       = 0.06
-        shake.repeatCount    = 2
-        shake.autoreverses   = true
-        
-        let fromPoint        = CGPoint(x: center.x - 8, y: center.y)
-        let fromValue        = NSValue(cgPoint: fromPoint)
-        
-        let toPoint          = CGPoint(x: center.x + 16, y: center.y)
-        let toValue          = NSValue(cgPoint: fromPoint)
-        
-        shake.fromValue      = fromValue
-        shake.toValue        = toValue
-        
-        layer.add(shake, forKey: "position")
+ let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.4
+        pulse.fromValue = 0.98
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = .infinity
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+        layer.add(pulse, forKey: nil)
     }
     
 }
