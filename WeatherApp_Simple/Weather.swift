@@ -2,83 +2,74 @@ import Foundation
  
 struct Weather {
   
-  let dateAndTime: NSDate
-  
-  let city: String
-  let country: String
+ // Location properties
   let longitude: Double
   let latitude: Double
-  
-  let weatherID: Int
-  let mainWeather: String
-  let weatherDescription: String
-  let weatherIconID: String
-  
-  // OpenWeatherMap reports temperature in Kelvin,
-  // which is why we provide celsius and fahrenheit
-  // computed properties.
-  private let temp: Double
-  var tempCelsius: Double {
+
+ // Current weather properties
+  let currentDateAndTime: NSDate
+  let currentTemp: Double
+    var tempCelsius: Double {
     get {
-      return temp - 273.15
+      return currentTemp - 273.15
     }
-  }
-  var tempFahrenheit: Double {
-    get {
-      return (temp - 273.15) * 1.8 + 32
     }
-  }
-  let humidity: Int
-  let pressure: Int
-  let cloudCover: Int
-  let windSpeed: Double
+  let currentWeatherID: Int
+  let currentMainWeather: String
+  let currentWeatherDescription: String
+  let currentWeatherIconID: String
   
-  // These properties are optionals because OpenWeatherMap doesn't provide:
-  // - a value for wind direction when the wind speed is negligible
-  // - rain info when there is no rainfall
-  let windDirection: Double?
-  let rainfallInLast3Hours: Double?
-  
-  let sunrise: NSDate
-  let sunset: NSDate
-  
+ // Daily weather properties
+    let dailyDateAndTime: NSDate
+    let dailyMinTemp: Double
+    let dailyMaxTemp: Double
+    
+ // Hourly weather properties
+    let hourlyTime: NSDate
+    let hourlyTemp: Double
+    let hourlyWeatherID: Int
+    let hourlyMainWeather: String
+    let hourlyWeatherDescription: String
+    let hourlyWeatherIconID: String
+    
+    
   init(weatherData: [String: AnyObject]) {
-    dateAndTime = NSDate(timeIntervalSince1970: weatherData["dt"] as! TimeInterval)
-    city = weatherData["name"] as! String
     
-    let coordDict = weatherData["coord"] as! [String: AnyObject]
-    longitude = coordDict["lon"] as! Double
-    latitude = coordDict["lat"] as! Double
+   
+    longitude = weatherData["lon"] as! Double
+    latitude = weatherData["lat"] as! Double
+
+    // Current weather data parsing
+    let currentDict = weatherData["current"] as! [String: AnyObject]
+    currentDateAndTime = NSDate(timeIntervalSince1970: currentDict["dt"] as! TimeInterval)
+    currentTemp = currentDict["temp"] as! Double
     
-    let weatherDict = weatherData["weather"]![0] as! [String: AnyObject]
-    weatherID = weatherDict["id"] as! Int
-    mainWeather = weatherDict["main"] as! String
-    weatherDescription = weatherDict["description"] as! String
-    weatherIconID = weatherDict["icon"] as! String
+    let currentWeatherDict = currentDict["weather"]![0] as! [String: AnyObject]
+    currentWeatherID = currentWeatherDict["id"] as! Int
+    currentMainWeather = currentWeatherDict["main"] as! String
+    currentWeatherDescription = currentWeatherDict["description"] as! String
+    currentWeatherIconID = currentWeatherDict["icon"] as! String
     
-    let mainDict = weatherData["main"] as! [String: AnyObject]
-    temp = mainDict["temp"] as! Double
-    humidity = mainDict["humidity"] as! Int
-    pressure = mainDict["pressure"] as! Int
+    // Daily weather data parsing
+    let dailyDict = weatherData["daily"]![0] as! [String: AnyObject]
+    dailyDateAndTime = NSDate(timeIntervalSince1970: dailyDict["dt"] as! TimeInterval)
     
-    cloudCover = weatherData["clouds"]!["all"] as! Int
+    let dailyTempDict = dailyDict["temp"] as! [String: AnyObject]
+    dailyMinTemp = dailyTempDict["min"] as! Double
+    dailyMaxTemp = dailyTempDict["max"] as! Double
     
-    let windDict = weatherData["wind"] as! [String: AnyObject]
-    windSpeed = windDict["speed"] as! Double
-    windDirection = windDict["deg"] as? Double
+    // Hourly weather data parsing
+     let hourlyDict = weatherData["hourly"]![0] as! [String: AnyObject]
+    hourlyTime = NSDate(timeIntervalSince1970: hourlyDict["dt"] as! TimeInterval)
+    hourlyTemp = hourlyDict["temp"] as! Double
     
-    if weatherData["rain"] != nil {
-      let rainDict = weatherData["rain"] as! [String: AnyObject]
-      rainfallInLast3Hours = rainDict["3h"] as? Double
+    let hourlyWeatherDict = hourlyDict["weather"]![0] as! [String: AnyObject]
+    hourlyWeatherID = currentWeatherDict["id"] as! Int
+       hourlyMainWeather = currentWeatherDict["main"] as! String
+       hourlyWeatherDescription = currentWeatherDict["description"] as! String
+       hourlyWeatherIconID = currentWeatherDict["icon"] as! String
     }
-    else {
-      rainfallInLast3Hours = nil
-    }
-    
-    let sysDict = weatherData["sys"] as! [String: AnyObject]
-    country = sysDict["country"] as! String
-    sunrise = NSDate(timeIntervalSince1970: sysDict["sunrise"] as! TimeInterval)
-    sunset = NSDate(timeIntervalSince1970:sysDict["sunset"] as! TimeInterval)
-  }
   
 }
+
+ 

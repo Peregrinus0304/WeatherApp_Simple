@@ -150,8 +150,9 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     // Handle the user's selection.
     public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         var selectedCity = place.name?.urlEncoded ?? "UncnownLocation"
-        weather.getWeatherByCity(city: selectedCity)
+        weather.getWeatherByCoordinates(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         dismiss(animated: true, completion: nil)
+        self.cityLabel.text = place.name
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -180,8 +181,9 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
 extension ViewController: WeatherGetterDelegate {
     func didGetWeather(weather: Weather) {
         DispatchQueue.main.async {
-            self.cityLabel.text = weather.city
-            self.weatherLabel.text = weather.weatherDescription
+           
+          
+            self.weatherLabel.text = weather.currentWeatherDescription
             self.temperatureLabel.text = "\(Int(round(weather.tempCelsius)))°"
         }
     }

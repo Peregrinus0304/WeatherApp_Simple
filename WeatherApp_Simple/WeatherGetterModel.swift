@@ -25,7 +25,7 @@ protocol WeatherGetterDelegate {
 
 class WeatherGetter {
     
-    private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/weather"
+    private let openWeatherMapBaseURL = "https://api.openweathermap.org/data/2.5/onecall?"
     private let openWeatherMapAPIKey = "13ca86f4093bca85ed6083e5802a8414"
     
     private var delegate: WeatherGetterDelegate
@@ -45,7 +45,7 @@ class WeatherGetter {
     // Getting weather by coordinates
     
     func getWeatherByCoordinates(latitude: Double, longitude: Double) {
-        let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&lat=\(latitude)&lon=\(longitude)")!
+        let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)lat=\(latitude)&lon=\(longitude)&exclude=minutely&units=imperial&lang=ua&appid=\(openWeatherMapAPIKey)")!
         getWeather(weatherRequestURL: weatherRequestURL)
     }
     
