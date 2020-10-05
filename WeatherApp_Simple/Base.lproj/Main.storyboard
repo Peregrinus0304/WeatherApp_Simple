@@ -94,6 +94,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WdC-zg-YEv">
+                                <rect key="frame" x="8" y="179" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="9iB-W8-oVV"/>
+                                    <constraint firstAttribute="height" constant="120" id="NAo-dG-tjs"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,8 +109,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qGy-7f-ahN" secondAttribute="trailing" constant="121" id="3AD-ZO-gn4"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4EE-5U-lrK"/>
                             <constraint firstItem="fFt-LH-fVV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="94" id="54k-xp-MWh"/>
+                            <constraint firstItem="WdC-zg-YEv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="5Zz-Bg-9IF"/>
                             <constraint firstAttribute="trailing" secondItem="jZA-5a-QdT" secondAttribute="trailing" id="73n-Rt-sfx"/>
                             <constraint firstAttribute="trailing" secondItem="sP7-hH-3X7" secondAttribute="trailing" id="7Od-Li-xbS"/>
+                            <constraint firstItem="2TG-TQ-Jem" firstAttribute="top" secondItem="WdC-zg-YEv" secondAttribute="bottom" constant="112" id="AIa-Ah-ips"/>
                             <constraint firstItem="2Vx-Xd-oMv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D3t-GP-YRe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fFt-LH-fVV" secondAttribute="trailing" constant="98" id="DEQ-Ad-wB9"/>
                             <constraint firstAttribute="bottom" secondItem="sP7-hH-3X7" secondAttribute="bottom" id="HUD-dn-05H"/>
@@ -112,6 +121,7 @@
                             <constraint firstItem="jZA-5a-QdT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WJu-Qq-kzp"/>
                             <constraint firstItem="wIa-lA-Sch" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="121" id="Zmx-C6-7MR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vx-Xd-oMv" secondAttribute="trailing" id="aqH-IM-epZ"/>
+                            <constraint firstItem="WdC-zg-YEv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="135" id="bb3-T9-wey"/>
                             <constraint firstItem="2TG-TQ-Jem" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eH6-nk-lPe"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="447" id="lzp-GW-ZaB"/>
                             <constraint firstItem="qGy-7f-ahN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="121" id="mGK-8G-R94"/>
@@ -126,6 +136,7 @@
                         <outlet property="cityLabel" destination="fFt-LH-fVV" id="kdc-fo-eei"/>
                         <outlet property="searchButton" destination="2Vx-Xd-oMv" id="CwE-wH-sOc"/>
                         <outlet property="temperatureLabel" destination="wIa-lA-Sch" id="ury-QC-zkh"/>
+                        <outlet property="weatherIconImageView" destination="WdC-zg-YEv" id="y2t-Si-yEr"/>
                         <outlet property="weatherImageView" destination="jZA-5a-QdT" id="VCW-hl-IxC"/>
                         <outlet property="weatherLabel" destination="qGy-7f-ahN" id="mdc-Uw-BTb"/>
                     </connections>

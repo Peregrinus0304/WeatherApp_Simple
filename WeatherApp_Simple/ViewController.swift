@@ -26,6 +26,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     
+    @IBOutlet weak var weatherIconImageView: UIImageView!
+    
     
     var weather: WeatherGetter!
     let locationManager = CLLocationManager()
@@ -44,13 +46,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         weatherLabel.text = ""
         temperatureLabel.text = ""
         weatherImageView.loadGif(name: "clear sky")
-        
+       
     }
-    
-    
-    
-   
-  
     
     
     //MARK: - Getting location logic
@@ -185,6 +182,9 @@ extension ViewController: WeatherGetterDelegate {
           
             self.weatherLabel.text = weather.currentWeatherDescription
             self.temperatureLabel.text = "\(Int(round(weather.tempCelsius)))°"
+            self.weatherIconImageView.image = UIImage(named: "\(weather.currentWeatherIconID)")
+           let currentWeatherBackground = setUpBackground(IconID: weather.currentWeatherIconID)
+            self.weatherImageView.loadGif(name: currentWeatherBackground)
         }
     }
     
@@ -202,8 +202,41 @@ extension ViewController: WeatherGetterDelegate {
 // MARK: - CLLocationManagerDelegate methods
 
 
+// MARK: - Managing background animation
 
-
+func setUpBackground(IconID: String) -> String {
+    var  gifTitle = ""
+    
+    switch IconID {
+        case "01d":
+        gifTitle = "clear sky"
+        case "01n":
+        gifTitle = "clear sky night"
+        case "02d", "03d", "04d":
+        gifTitle = "clouds"
+        case "02n", "03n", "04n":
+        gifTitle = "clouds night"
+        case "09d", "10d":
+        gifTitle = "rain day"
+        case "09n", "10n":
+        gifTitle = "rain night"
+        case "11d", "11n":
+        gifTitle = "thunderstorm"
+        case "13d":
+        gifTitle = "snow"
+        case "13n":
+        gifTitle = "snow night"
+        case "50d":
+        gifTitle = "mist"
+        case "50d":
+        gifTitle = "mist night"
+        default:
+        gifTitle = "default weather"
+    }
+    
+   
+    return gifTitle
+}
 
 
 
