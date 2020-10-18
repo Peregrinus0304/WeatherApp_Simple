@@ -22,6 +22,7 @@
 		4581A959252BB2AD00FF1AFA /* clear sky night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4581A958252BB2AD00FF1AFA /* clear sky night.gif */; };
 		4581A95B252BB31F00FF1AFA /* snow night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4581A95A252BB31F00FF1AFA /* snow night.gif */; };
 		4581A95D252BB95900FF1AFA /* default weather.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4581A95C252BB95900FF1AFA /* default weather.gif */; };
+		4581A963253CC51900FF1AFA /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581A962253CC51900FF1AFA /* HourlyTableViewCell.swift */; };
 		45AC16C725095CE90008F0D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16C625095CE90008F0D1 /* AppDelegate.swift */; };
 		45AC16C925095CE90008F0D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16C825095CE90008F0D1 /* SceneDelegate.swift */; };
 		45AC16CB25095CE90008F0D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16CA25095CE90008F0D1 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 		4581A958252BB2AD00FF1AFA /* clear sky night.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "clear sky night.gif"; sourceTree = "<group>"; };
 		4581A95A252BB31F00FF1AFA /* snow night.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "snow night.gif"; sourceTree = "<group>"; };
 		4581A95C252BB95900FF1AFA /* default weather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "default weather.gif"; sourceTree = "<group>"; };
+		4581A962253CC51900FF1AFA /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		45AC16C325095CE90008F0D1 /* WeatherApp_Simple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp_Simple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45AC16C625095CE90008F0D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45AC16C825095CE90008F0D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				45AC16CA25095CE90008F0D1 /* ViewController.swift */,
 				45AC16CC25095CE90008F0D1 /* Main.storyboard */,
 				4581A936251134C400FF1AFA /* GifExtension.swift */,
+				4581A962253CC51900FF1AFA /* HourlyTableViewCell.swift */,
 				4581A93A2511388E00FF1AFA /* Gif images */,
 				45AC16DC250A8D070008F0D1 /* SearchViewController.swift */,
 				456228C4250A941F00D7E45B /* WeatherGetterModel.swift */,
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4581A931250D2C9100FF1AFA /* Weather.swift in Sources */,
+				4581A963253CC51900FF1AFA /* HourlyTableViewCell.swift in Sources */,
 				45AC16DD250A8D070008F0D1 /* SearchViewController.swift in Sources */,
 				45AC16DB25095D1B0008F0D1 /* CustomButton.swift in Sources */,
 				4581A937251134C400FF1AFA /* GifExtension.swift in Sources */,

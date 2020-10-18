@@ -10,6 +10,7 @@ import UIKit
 import GooglePlaces
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+ 
     
     
     
@@ -28,6 +29,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var weatherIconImageView: UIImageView!
     
+    @IBOutlet weak var hourlyTableView: UITableView!
     
     var weather: WeatherGetter!
     let locationManager = CLLocationManager()
@@ -39,7 +41,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         weather = WeatherGetter(delegate: self)
         getLocation()
         searchButton.animate()
-        
+        hourlyTableView.delegate = self
+        hourlyTableView.dataSource = self
         
         // Initialize UI
         cityLabel.text = "simple weather"
@@ -185,6 +188,7 @@ extension ViewController: WeatherGetterDelegate {
             self.weatherIconImageView.image = UIImage(named: "\(weather.currentWeatherIconID)")
            let currentWeatherBackground = setUpBackground(IconID: weather.currentWeatherIconID)
             self.weatherImageView.loadGif(name: currentWeatherBackground)
+            self.hourlyTableView.reloadData()
         }
     }
     
@@ -197,6 +201,24 @@ extension ViewController: WeatherGetterDelegate {
         }
     }
 }
+
+// MARK: - HourlyTableView protocols
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         <#code#>
+     }
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = hourlyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HourlyTableViewCell
+        return cell
+     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    }
+    
+
+
 
 
 // MARK: - CLLocationManagerDelegate methods
@@ -237,6 +259,7 @@ func setUpBackground(IconID: String) -> String {
    
     return gifTitle
 }
+
 
 
 
