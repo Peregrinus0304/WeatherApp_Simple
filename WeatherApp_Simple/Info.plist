@@ -62,6 +62,8 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>In order to show you your local weather, the app needs access to your device`s location coordinates</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>In order to show you your local weather, the app needs access to your device`s location coordinates</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>NSAppTransportSecurity</key>

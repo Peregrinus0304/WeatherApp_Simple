@@ -8,8 +8,16 @@
 
 import UIKit
 import GooglePlaces
+import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+
+private let dateFormatter: DateFormatter = {
+    let  dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE, MMM d, h:mm aaa"
+    return dateFormatter
+}()
+
+class ViewController: UIViewController {
  
     
     
@@ -18,90 +26,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBOutlet weak var cityLabel: UILabel!
-    
     @IBOutlet weak var weatherLabel: UILabel!
-    
     @IBOutlet weak var temperatureLabel: UILabel!
-    
     @IBOutlet weak var searchButton: CustomButton!
-    
     @IBOutlet weak var weatherImageView: UIImageView!
-    
     @IBOutlet weak var weatherIconImageView: UIImageView!
-    
     @IBOutlet weak var hourlyTableView: UITableView!
     
-    var weather: WeatherGetter!
-    let locationManager = CLLocationManager()
- 
-    
-    
+    var weatherDetail: WeatherDetail!
+     var locationManager:CLLocationManager!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        weather = WeatherGetter(delegate: self)
-        getLocation()
-        searchButton.animate()
+        
+       getLocation()
         hourlyTableView.delegate = self
         hourlyTableView.dataSource = self
-        
+         searchButton.animate()
+     
         // Initialize UI
-        cityLabel.text = "simple weather"
+        cityLabel.text = ""
         weatherLabel.text = ""
         temperatureLabel.text = ""
-        weatherImageView.loadGif(name: "clear sky")
+        weatherImageView.loadGif(name: "default weather")
        
     }
     
-    
-    //MARK: - Getting location logic
-    
-    func getLocation() {
-        guard CLLocationManager.locationServicesEnabled() else {
-            print("Location services are disabled on your device. In order to use this app, go to " +
-                "Settings → Privacy → Location Services and turn location services on.")
-            return
-        }
-        
-        let authStatus = CLLocationManager.authorizationStatus()
-        guard authStatus == .authorizedWhenInUse else {
-            switch authStatus {
-                case .denied, .restricted:
-                    print("This app is not authorized to use your location. In order to use this app, " +
-                        "go to Settings → GeoExample → Location and select the \"While Using " +
-                        "the App\" setting.")
-                
-                case .notDetermined:
-                    locationManager.requestWhenInUseAuthorization()
-                
-                default:
-                    print("Oops! This case should never be reached.")
-            }
-            return
-        }
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
-    // This is called if:
-        // - the location manager is updating, and
-        // - it was able to get the user's location.
-        func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            let newLocation = locations.last!
-   
-        }
-        
-        // This is called if:
-        // - the location manager is updating, and
-        // - it WASN'T able to get the user's location.
-        func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-            DispatchQueue.main.async {
-                self.showSimpleAlert(title: "Can't determine your location",
-                                          message: "The GPS and other location services aren't responding.")
-            }
-            print("Error: \(error)")
-        }
     
     //MARK: - AutocompleteVC logic
     
@@ -143,6 +93,92 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
 }
 
+
+// MARK: - CLLocationManagerDelegate
+  
+  
+  extension ViewController: CLLocationManagerDelegate {
+     
+    func getLocation() {
+    locationManager = CLLocationManager()
+        locationManager.delegate = self
+    }
+     
+      func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+           switch status {
+                 
+                 case .notDetermined:
+                     locationManager.requestWhenInUseAuthorization()
+                 case .restricted:
+                     self.showSimpleAlert(title: "Location access is restricted", message: "This app is not authorized to use your location. In order to use this app, " +
+                     "go to Settings → WeatherApp_Simple → Location and select the \"While Using " +
+                     "the App\" setting.")
+                 case .denied:
+                   break
+                 case .authorizedAlways:
+                     locationManager.requestLocation()
+                    
+                 case .authorizedWhenInUse:
+                     locationManager.requestLocation()
+             
+                 @unknown default:
+                     print(status)
+                 }
+      }
+      
+      func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+            let currentLocation = locations.last ?? CLLocation()
+         let geoCoder = CLGeocoder()
+                geoCoder.reverseGeocodeLocation(currentLocation) { (placeMarks, error) in
+                    var locationName = ""
+                    if placeMarks != nil{
+                        let placeMark = placeMarks?.last
+                        locationName = placeMark?.name ?? ""
+                    } else {
+                        locationName = "Не можу знайти міцезнаходження"
+                    }
+                  print(currentLocation)
+                    self.weatherDetail = WeatherDetail(name: locationName, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+                    self.cityLabel.text = locationName
+                    self.weatherDetail.getData {
+                                       DispatchQueue.main.async {
+                                           dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
+                                           let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
+                                           //self.dataLabel.text = dateFormatter.string(from: usableDate)
+                                          self.weatherLabel.text = self.weatherDetail.summary
+                                           self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
+                                          self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
+                                          self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
+                                          
+                                           
+                                       }
+                                   }
+                    
+                }
+          
+       
+      }
+      
+      
+      func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+          
+          DispatchQueue.main.async {
+              self.showSimpleAlert(title: "Can't determine your location",
+                                        message: "The GPS and other location services aren't responding.")
+          }
+        print("LocationManager didFailWithError \(error.localizedDescription)")
+        if let error = error as? CLError, error.code == .denied {
+           // Location updates are not authorized.
+          // To prevent forever looping of `didFailWithError` callback
+           locationManager?.stopMonitoringSignificantLocationChanges()
+           return
+        }
+      }
+      
+      
+  } //end
+
 //MARK: - AutocompleteViewController Delegate
 
 extension ViewController: GMSAutocompleteViewControllerDelegate {
@@ -150,9 +186,24 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     // Handle the user's selection.
     public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         var selectedCity = place.name?.urlEncoded ?? "UncnownLocation"
-        weather.getWeatherByCoordinates(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        weatherDetail = WeatherDetail(name: selectedCity, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         dismiss(animated: true, completion: nil)
-        self.cityLabel.text = place.name
+                         self.cityLabel.text = place.name
+        weatherDetail.getData {
+                     DispatchQueue.main.async {
+                         dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
+                         let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
+                         //self.dataLabel.text = dateFormatter.string(from: usableDate)
+                        self.weatherLabel.text = self.weatherDetail.summary
+                         self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
+                        self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
+                        self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
+                        
+                         
+                     }
+                 }
+        self.hourlyTableView.reloadData()
+        //self.collectionView.reloadData()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -176,36 +227,12 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     
 }
 
-//MARK: - WeatherGetter Delegate
-
-extension ViewController: WeatherGetterDelegate {
-    func didGetWeather(weather: Weather) {
-        DispatchQueue.main.async {
-           
-          
-            self.weatherLabel.text = weather.currentWeatherDescription
-            self.temperatureLabel.text = "\(Int(round(weather.tempCelsius)))°"
-            self.weatherIconImageView.image = UIImage(named: "\(weather.currentWeatherIconID)")
-           let currentWeatherBackground = setUpBackground(IconID: weather.currentWeatherIconID)
-            self.weatherImageView.loadGif(name: currentWeatherBackground)
-            self.hourlyTableView.reloadData()
-        }
-    }
-    
-    func didNotGetWeather(error: NSError) {
-        DispatchQueue.main.async {
-            self.showSimpleAlert(title: "Can't get the weather",
-                                 message: "The weather service isn't responding.")
-            
-            print("didNotGetWeather error: \(error)")
-        }
-    }
-}
 
 // MARK: - HourlyTableView protocols
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         <#code#>
+        return 4 //weatherDetail.hourlyWeatherData.count
+        
      }
      
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -217,11 +244,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     }
     
-
-
-
-
-// MARK: - CLLocationManagerDelegate methods
 
 
 // MARK: - Managing background animation
