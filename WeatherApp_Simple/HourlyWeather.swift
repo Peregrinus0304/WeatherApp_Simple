@@ -10,6 +10,8 @@ import Foundation
 
 struct HourlyWeather {
     var hour: String
-    var hourlyTemp: Int
+    var hourlySummary: String
     var hourlyIcon: String
+    var hourlyTemp: Int
 }
+

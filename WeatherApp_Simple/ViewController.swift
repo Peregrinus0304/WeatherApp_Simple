@@ -35,7 +35,8 @@ class ViewController: UIViewController {
     
     var weatherDetail: WeatherDetail!
      var locationManager:CLLocationManager!
-   
+     var dataReceived = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
         hourlyTableView.delegate = self
         hourlyTableView.dataSource = self
          searchButton.animate()
+        
      
         // Initialize UI
         cityLabel.text = ""
@@ -150,7 +152,8 @@ class ViewController: UIViewController {
                                            self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                                           self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                                           self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-                                          
+                                        self.dataReceived = true
+                                        self.hourlyTableView.reloadData()
                                            
                                        }
                                    }
@@ -198,12 +201,11 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                          self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                         self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                         self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-                        
+                        self.dataReceived = true
+                         self.hourlyTableView.reloadData()
                          
                      }
                  }
-        self.hourlyTableView.reloadData()
-        //self.collectionView.reloadData()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -230,19 +232,35 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
 
 // MARK: - HourlyTableView protocols
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4 //weatherDetail.hourlyWeatherData.count
         
-     }
+        if dataReceived == true {
+            return weatherDetail.hourlyWeatherData.count
+        } else {
+            return 1
+        }
+        
+        
+        }
      
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = hourlyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HourlyTableViewCell
-        return cell
-     }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+               let cell = hourlyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HourlyTableViewCell
+               
+            if dataReceived == true {
+                cell.hourlyWeather = weatherDetail.hourlyWeatherData[indexPath.row] } else {
+                return cell
+            }
+                return cell
+           }
+     
+     
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    }
+}
     
 
 
@@ -296,6 +314,7 @@ extension String {
     }
     
 }
+
 
 
 
