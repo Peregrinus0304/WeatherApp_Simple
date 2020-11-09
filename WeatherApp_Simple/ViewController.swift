@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var weatherIconImageView: UIImageView!
     @IBOutlet weak var hourlyTableView: UITableView!
+    @IBOutlet weak var dailyCollectionView: UICollectionView!
+    
     
     var weatherDetail: WeatherDetail!
      var locationManager:CLLocationManager!
@@ -43,6 +45,8 @@ class ViewController: UIViewController {
        getLocation()
         hourlyTableView.delegate = self
         hourlyTableView.dataSource = self
+        dailyCollectionView.delegate = self
+         dailyCollectionView.dataSource = self
          searchButton.animate()
         
      
@@ -154,7 +158,7 @@ class ViewController: UIViewController {
                                           self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
                                         self.dataReceived = true
                                         self.hourlyTableView.reloadData()
-                                           
+                                        self.dailyCollectionView.reloadData()
                                        }
                                    }
                     
@@ -203,7 +207,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                         self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
                         self.dataReceived = true
                          self.hourlyTableView.reloadData()
-                         
+                        self.dailyCollectionView.reloadData()
                      }
                  }
     }
@@ -262,6 +266,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
     
+// MARK: - DailyCollectionView protocols
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       if dataReceived == true {
+        return weatherDetail.dailyWeatherData.count
+       } else {
+           return 1
+       }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyCollectionViewCell
+            
+        
+        if dataReceived == true {
+                       cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row] } else{
+                       return cell
+                   }
+        
+        return cell
+    }
+}
+
+
 
 
 // MARK: - Managing background animation

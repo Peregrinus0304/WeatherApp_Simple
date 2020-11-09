@@ -127,13 +127,56 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XYi-Xt-guM">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DailyCell" id="XYi-Xt-guM" customClass="DailyCollectionViewCell" customModule="WeatherApp_Simple" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-24" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XvR-JI-Dpj">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLo-cr-ERz">
+                                                    <rect key="frame" x="8" y="32" width="112" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="beV-ti-LC0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRG-nf-4Re">
+                                                    <rect key="frame" x="8" y="77" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgJ-Cu-nZl">
+                                                    <rect key="frame" x="78" y="77" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kLo-cr-ERz" firstAttribute="leading" secondItem="XvR-JI-Dpj" secondAttribute="leading" constant="8" id="0wb-dN-0jR"/>
+                                                <constraint firstAttribute="bottom" secondItem="fgJ-Cu-nZl" secondAttribute="bottom" constant="8" id="8SZ-AT-xi8"/>
+                                                <constraint firstAttribute="trailing" secondItem="kLo-cr-ERz" secondAttribute="trailing" constant="8" id="CYc-wj-VTg"/>
+                                                <constraint firstItem="kLo-cr-ERz" firstAttribute="top" secondItem="XvR-JI-Dpj" secondAttribute="top" constant="8" id="CuY-JO-sqU"/>
+                                                <constraint firstItem="vRG-nf-4Re" firstAttribute="top" secondItem="kLo-cr-ERz" secondAttribute="bottom" constant="8" id="DoC-BG-3bk"/>
+                                                <constraint firstItem="vRG-nf-4Re" firstAttribute="leading" secondItem="XvR-JI-Dpj" secondAttribute="leading" constant="8" id="Eom-2o-7DK"/>
+                                                <constraint firstItem="fgJ-Cu-nZl" firstAttribute="leading" secondItem="vRG-nf-4Re" secondAttribute="trailing" constant="8" id="Ol7-Tq-VmZ"/>
+                                                <constraint firstItem="fgJ-Cu-nZl" firstAttribute="top" secondItem="kLo-cr-ERz" secondAttribute="bottom" constant="8" id="VSO-i7-uHG"/>
+                                                <constraint firstItem="fgJ-Cu-nZl" firstAttribute="leading" secondItem="vRG-nf-4Re" secondAttribute="trailing" constant="8" id="XLJ-cz-ews"/>
+                                                <constraint firstItem="fgJ-Cu-nZl" firstAttribute="width" secondItem="vRG-nf-4Re" secondAttribute="width" id="doM-Vh-lN4"/>
+                                                <constraint firstAttribute="trailing" secondItem="fgJ-Cu-nZl" secondAttribute="trailing" constant="8" id="hCy-KB-QcN"/>
+                                                <constraint firstAttribute="bottom" secondItem="vRG-nf-4Re" secondAttribute="bottom" constant="8" id="jwU-KZ-aqq"/>
+                                                <constraint firstItem="fgJ-Cu-nZl" firstAttribute="height" secondItem="vRG-nf-4Re" secondAttribute="height" id="yEE-4O-e4X"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="maxDailyTempLabel" destination="fgJ-Cu-nZl" id="tvb-gb-T6K"/>
+                                            <outlet property="minDailyTempLabel" destination="vRG-nf-4Re" id="fy2-9M-mRF"/>
+                                            <outlet property="weekdayNameLabel" destination="kLo-cr-ERz" id="4ND-cz-syC"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -177,6 +220,7 @@
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="fFt-LH-fVV" id="kdc-fo-eei"/>
+                        <outlet property="dailyCollectionView" destination="2TG-TQ-Jem" id="E4j-Gm-lcb"/>
                         <outlet property="hourlyTableView" destination="sP7-hH-3X7" id="T5L-u9-c4k"/>
                         <outlet property="searchButton" destination="2Vx-Xd-oMv" id="CwE-wH-sOc"/>
                         <outlet property="temperatureLabel" destination="wIa-lA-Sch" id="ury-QC-zkh"/>

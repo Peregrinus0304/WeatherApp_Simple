@@ -104,7 +104,7 @@ class WeatherDetail: WeatherLocation{
                     dateFormatter.timeZone = TimeZone(identifier: result.timezone)
                     let dailyDateAndTime = dateFormatter.string(from: weekdayDate)
                     
-                    let dailySummary = result.daily[index].weather[0].description
+                    //let dailySummary = result.daily[index].weather[0].description
                     let dailyMaxTemp = Int(result.daily[index].temp.max.rounded())
                     let dailyMinTemp = Int(result.daily[index].temp.min.rounded())
                     
