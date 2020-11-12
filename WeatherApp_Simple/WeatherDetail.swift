@@ -80,7 +80,7 @@ class WeatherDetail: WeatherLocation{
     
     // create a URL
         guard let url = URL(string: urlString) else {
-            print("Error: відсутні данні")
+            print("No data")
         return
         }
     
@@ -96,7 +96,7 @@ class WeatherDetail: WeatherLocation{
                 let result = try JSONDecoder().decode(Result.self, from: data!)
                 self.timezone = result.timezone
                 self.currentTime = result.current.dt
-                self.temperature = Int(result.current.temp.rounded())
+                self.temperature = self.calculateCelsius(fahrenheit: result.current.temp.rounded())
                 self.summary = result.current.weather[0].description
                 self.dayIcon = result.current.weather[0].icon
                 for index in 0..<result.daily.count {
@@ -105,8 +105,8 @@ class WeatherDetail: WeatherLocation{
                     let dailyDateAndTime = dateFormatter.string(from: weekdayDate)
                     
                     //let dailySummary = result.daily[index].weather[0].description
-                    let dailyMaxTemp = Int(result.daily[index].temp.max.rounded())
-                    let dailyMinTemp = Int(result.daily[index].temp.min.rounded())
+                    let dailyMaxTemp = self.calculateCelsius(fahrenheit: result.daily[index].temp.max.rounded())
+                    let dailyMinTemp = self.calculateCelsius(fahrenheit: result.daily[index].temp.min.rounded())
                     
                     let dailyWeather = DailyWeather(dailyDateAndTime: dailyDateAndTime, dailyMinTemp: dailyMinTemp, dailyMaxTemp: dailyMaxTemp)
                     self.dailyWeatherData.append(dailyWeather)
@@ -117,9 +117,9 @@ class WeatherDetail: WeatherLocation{
                         let hourlyDay = Date(timeIntervalSince1970: result.hourly[index].dt)
                         hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
                         let hour = hourlyFormatter.string(from: hourlyDay)
-                        let hourlySummary = result.hourly[index].weather.description
+                        let hourlySummary = result.hourly[index].weather[0].description
                         let hourlyIcon =  result.hourly[index].weather[0].icon
-                        let hourlyTemp = Int(result.hourly[index].temp.rounded())
+                        let hourlyTemp = self.calculateCelsius(fahrenheit: result.hourly[index].temp.rounded())
                         let hourlyWeather = HourlyWeather(hour: hour, hourlySummary: hourlySummary, hourlyIcon: hourlyIcon, hourlyTemp: hourlyTemp)
                         self.hourlyWeatherData.append(hourlyWeather)
                     }
@@ -132,5 +132,13 @@ class WeatherDetail: WeatherLocation{
         }
         
         task.resume()
+    }
+    
+    func calculateCelsius(fahrenheit: Double) -> Int {
+        var celsius: Int
+        
+        celsius = Int((fahrenheit - 32) * 5 / 9)
+        
+        return celsius
     }
 }
