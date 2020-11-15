@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     
     //MARK: - Outlets
     
+
+   
+    @IBOutlet weak var blurredView: UIVisualEffectView!
     
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
@@ -48,6 +51,9 @@ class ViewController: UIViewController {
         dailyCollectionView.delegate = self
          dailyCollectionView.dataSource = self
          searchButton.animate()
+        blurredView.layer.cornerRadius = 15
+        blurredView.layer.borderWidth = 3
+         blurredView.layer.borderColor = CGColor(srgbRed: 153, green: 255, blue: 255, alpha: 1)
         
      
         // Initialize UI
@@ -55,6 +61,7 @@ class ViewController: UIViewController {
         weatherLabel.text = ""
         temperatureLabel.text = ""
         weatherImageView.loadGif(name: "default weather")
+        
        
     }
     
@@ -279,7 +286,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyCollectionViewCell
-            
+        cell.layer.cornerRadius = 15
+        cell.layer.borderColor = CGColor(srgbRed: 153, green: 255, blue: 255, alpha: 1)
+    
+        cell.layer.borderWidth = 3
         
         if dataReceived == true {
                        cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row] } else{
