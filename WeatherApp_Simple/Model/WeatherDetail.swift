@@ -62,7 +62,7 @@ class WeatherDetail: WeatherLocation{
     
 //MARK: - Reference
     
-    var currentTime = 0.0
+    var currentTime = ""
     var temperature = 0
     var summary = ""
     var dayIcon = ""
@@ -95,7 +95,8 @@ class WeatherDetail: WeatherLocation{
             do {
                 let result = try JSONDecoder().decode(Result.self, from: data!)
                 self.timezone = result.timezone
-                self.currentTime = result.current.dt
+                let unformattedDateAndTime = Date(timeIntervalSince1970: result.current.dt)
+                self.currentTime = hourlyFormatter.string(from: unformattedDateAndTime)
                 self.temperature = self.calculateCelsius(fahrenheit: result.current.temp.rounded())
                 self.summary = result.current.weather[0].description
                 self.dayIcon = result.current.weather[0].icon

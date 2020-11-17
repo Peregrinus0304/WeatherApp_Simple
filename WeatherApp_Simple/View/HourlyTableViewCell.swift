@@ -15,6 +15,7 @@ class HourlyTableViewCell: UITableViewCell {
     @IBOutlet weak var hourlyWeatherDescriptionTextView: UITextView!
     @IBOutlet weak var hourlyTempLabel: UILabel!
 
+    
         var hourlyWeather: HourlyWeather! {
             didSet{
                 hourlyImageView.image = UIImage(named: hourlyWeather.hourlyIcon)

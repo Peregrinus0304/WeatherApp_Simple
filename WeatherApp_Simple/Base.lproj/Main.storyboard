@@ -19,7 +19,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jZA-5a-QdT">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
                             </imageView>
-                            <visualEffectView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="29W-cc-bts">
+                            <visualEffectView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="29W-cc-bts" customClass="CustomBlurredView" customModule="WeatherApp_Simple" customModuleProvider="target">
                                 <rect key="frame" x="63" y="162" width="288" height="193"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lw9-S2-gB2">
                                     <rect key="frame" x="0.0" y="0.0" width="288" height="193"/>
@@ -30,7 +30,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="RT0-yH-njQ"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="35"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -52,7 +52,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="H9h-aF-caM"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="26"/>
                                             <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -73,6 +73,17 @@
                                     </constraints>
                                 </view>
                                 <blurEffect style="regular"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vx-Xd-oMv" customClass="CustomButton" customModule="WeatherApp_Simple" customModuleProvider="target">
                                 <rect key="frame" x="204" y="44" width="210" height="70"/>
@@ -100,34 +111,56 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="77R-67-har">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="77R-67-har">
+                                                    <rect key="frame" x="8" y="0.0" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="ASx-Nc-UMA"/>
+                                                        <constraint firstAttribute="width" constant="80" id="qA5-ZN-Bpu"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hourlyDateAndTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-cG-cb4">
-                                                    <rect key="frame" x="78" y="0.0" width="191" height="27"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-cG-cb4">
+                                                    <rect key="frame" x="96" y="11" width="222" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="br1-ad-uOC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="28"/>
+                                                    <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hourlyTemp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkD-p1-DQw">
-                                                    <rect key="frame" x="297" y="6" width="90" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkD-p1-DQw">
+                                                    <rect key="frame" x="326" y="0.0" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="tY2-iK-grP"/>
+                                                        <constraint firstAttribute="width" constant="80" id="unf-x0-LTn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="40"/>
+                                                    <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="hourlyWeatherDescription" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Beg-sX-nSr">
-                                                    <rect key="frame" x="71" y="26" width="183" height="28"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Beg-sX-nSr">
+                                                    <rect key="frame" x="96" y="51" width="222" height="29"/>
+                                                    <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Mec-cG-cb4" firstAttribute="leading" secondItem="77R-67-har" secondAttribute="trailing" constant="8" id="1Py-rV-tTn"/>
+                                                <constraint firstItem="Beg-sX-nSr" firstAttribute="leading" secondItem="77R-67-har" secondAttribute="trailing" constant="8" id="1zY-lZ-sF6"/>
+                                                <constraint firstItem="Beg-sX-nSr" firstAttribute="top" secondItem="Mec-cG-cb4" secondAttribute="bottom" id="5DW-pq-rxP"/>
+                                                <constraint firstItem="77R-67-har" firstAttribute="top" secondItem="7Dj-XL-ZWt" secondAttribute="top" id="5ZI-P1-zvL"/>
+                                                <constraint firstAttribute="bottom" secondItem="bkD-p1-DQw" secondAttribute="bottom" id="6F4-X2-4cV"/>
+                                                <constraint firstItem="Mec-cG-cb4" firstAttribute="top" secondItem="7Dj-XL-ZWt" secondAttribute="topMargin" id="7x4-0X-gn6"/>
+                                                <constraint firstItem="77R-67-har" firstAttribute="leading" secondItem="7Dj-XL-ZWt" secondAttribute="leading" constant="8" id="NpG-cs-J3R"/>
+                                                <constraint firstAttribute="bottom" secondItem="Beg-sX-nSr" secondAttribute="bottom" id="PSi-5M-o34"/>
+                                                <constraint firstItem="bkD-p1-DQw" firstAttribute="leading" secondItem="Beg-sX-nSr" secondAttribute="trailing" constant="8" id="Syj-FZ-y3F"/>
+                                                <constraint firstAttribute="bottom" secondItem="77R-67-har" secondAttribute="bottom" id="Xhg-PG-YwJ"/>
+                                                <constraint firstItem="bkD-p1-DQw" firstAttribute="top" secondItem="7Dj-XL-ZWt" secondAttribute="top" id="gsF-hl-PIu"/>
+                                                <constraint firstAttribute="trailing" secondItem="bkD-p1-DQw" secondAttribute="trailing" constant="8" id="mkA-h4-oFK"/>
+                                                <constraint firstItem="bkD-p1-DQw" firstAttribute="leading" secondItem="Mec-cG-cb4" secondAttribute="trailing" constant="8" id="urG-91-n0Y"/>
+                                            </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.69411764705882351" green="0.91764705882352937" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="hourlyDateAndTimeLabel" destination="Mec-cG-cb4" id="JtX-jA-zIg"/>
                                             <outlet property="hourlyImageView" destination="77R-67-har" id="YU8-V9-Tav"/>
@@ -165,7 +198,7 @@
                                                     </view>
                                                     <blurEffect style="regular"/>
                                                 </visualEffectView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLo-cr-ERz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLo-cr-ERz">
                                                     <rect key="frame" x="8" y="32" width="112" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="beV-ti-LC0"/>
@@ -174,16 +207,16 @@
                                                     <color key="textColor" red="0.29803921570000003" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRG-nf-4Re">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRG-nf-4Re">
                                                     <rect key="frame" x="8" y="77" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="15"/>
-                                                    <color key="textColor" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.69411764710000001" green="0.91764705879999997" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgJ-Cu-nZl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgJ-Cu-nZl">
                                                     <rect key="frame" x="78" y="77" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="15"/>
-                                                    <color key="textColor" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.69411764710000001" green="0.91764705879999997" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -215,6 +248,51 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9y-tU-5em" customClass="CustomBlurredView" customModule="WeatherApp_Simple" customModuleProvider="target">
+                                <rect key="frame" x="8" y="44" width="180" height="80"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="e6y-Id-bLJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iHo-nF-kUg">
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GFx-9i-Oqb">
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7v-V0-H0G">
+                                            <rect key="frame" x="8" y="18" width="164" height="62"/>
+                                            <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="35"/>
+                                            <color key="textColor" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="D7v-V0-H0G" firstAttribute="leading" secondItem="e6y-Id-bLJ" secondAttribute="leading" constant="8" id="DBY-e4-cDv"/>
+                                        <constraint firstItem="D7v-V0-H0G" firstAttribute="top" secondItem="e6y-Id-bLJ" secondAttribute="top" constant="18" id="Kum-ID-A8L"/>
+                                        <constraint firstAttribute="bottom" secondItem="D7v-V0-H0G" secondAttribute="bottom" id="NTM-uA-ZEj"/>
+                                        <constraint firstAttribute="trailing" secondItem="D7v-V0-H0G" secondAttribute="trailing" constant="8" id="v6b-Dv-2I0"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="77a-wm-v2j"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80000000000000004" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -224,6 +302,7 @@
                             <constraint firstItem="2TG-TQ-Jem" firstAttribute="top" secondItem="29W-cc-bts" secondAttribute="bottom" constant="56" id="7lH-Ts-Etb"/>
                             <constraint firstItem="2Vx-Xd-oMv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D3t-GP-YRe"/>
                             <constraint firstItem="jZA-5a-QdT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HGb-9F-gny"/>
+                            <constraint firstItem="P9y-tU-5em" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="TBb-vS-Ccu"/>
                             <constraint firstAttribute="bottom" secondItem="sP7-hH-3X7" secondAttribute="bottom" id="Xgh-tj-0Ok"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vx-Xd-oMv" secondAttribute="trailing" id="aqH-IM-epZ"/>
                             <constraint firstItem="29W-cc-bts" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="118" id="cIr-6w-LMJ"/>
@@ -231,6 +310,8 @@
                             <constraint firstItem="jZA-5a-QdT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eq0-al-7bt"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="jZA-5a-QdT" secondAttribute="bottom" id="ikw-Cd-uKD"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="447" id="lzp-GW-ZaB"/>
+                            <constraint firstItem="2Vx-Xd-oMv" firstAttribute="leading" secondItem="P9y-tU-5em" secondAttribute="trailing" constant="16" id="n08-Q8-lXU"/>
+                            <constraint firstItem="P9y-tU-5em" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qJ8-XC-i5v"/>
                             <constraint firstAttribute="trailingMargin" secondItem="29W-cc-bts" secondAttribute="trailing" constant="43" id="t6R-j9-ebe"/>
                             <constraint firstItem="sP7-hH-3X7" firstAttribute="top" secondItem="2TG-TQ-Jem" secondAttribute="bottom" id="wQk-8S-lr9"/>
                             <constraint firstAttribute="trailing" secondItem="jZA-5a-QdT" secondAttribute="trailing" id="ymV-t1-cVo"/>
@@ -239,9 +320,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="blurredView" destination="29W-cc-bts" id="I63-a3-YVA"/>
                         <outlet property="cityLabel" destination="fFt-LH-fVV" id="kdc-fo-eei"/>
                         <outlet property="dailyCollectionView" destination="2TG-TQ-Jem" id="E4j-Gm-lcb"/>
+                        <outlet property="dateAndTimeLabel" destination="D7v-V0-H0G" id="yb6-we-mzH"/>
                         <outlet property="hourlyTableView" destination="sP7-hH-3X7" id="T5L-u9-c4k"/>
                         <outlet property="searchButton" destination="2Vx-Xd-oMv" id="CwE-wH-sOc"/>
                         <outlet property="temperatureLabel" destination="wIa-lA-Sch" id="ury-QC-zkh"/>

@@ -20,7 +20,7 @@ class CustomButton: UIButton {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = 15 //frame.height/2
+        layer.cornerRadius = 15
         layer.borderColor = isEnabled ? tintColor.cgColor : UIColor.lightGray.cgColor
     }
 

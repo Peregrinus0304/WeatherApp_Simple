@@ -24,10 +24,7 @@ class ViewController: UIViewController {
     
     //MARK: - Outlets
     
-
-   
-    @IBOutlet weak var blurredView: UIVisualEffectView!
-    
+    @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -51,15 +48,13 @@ class ViewController: UIViewController {
         dailyCollectionView.delegate = self
          dailyCollectionView.dataSource = self
          searchButton.animate()
-        blurredView.layer.cornerRadius = 15
-        blurredView.layer.borderWidth = 3
-         blurredView.layer.borderColor = CGColor(srgbRed: 153, green: 255, blue: 255, alpha: 1)
         
      
         // Initialize UI
         cityLabel.text = ""
         weatherLabel.text = ""
         temperatureLabel.text = ""
+        dateAndTimeLabel.text = ""
         weatherImageView.loadGif(name: "default weather")
         
        
@@ -115,6 +110,8 @@ class ViewController: UIViewController {
     func getLocation() {
     locationManager = CLLocationManager()
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+   
     }
      
       func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -156,9 +153,7 @@ class ViewController: UIViewController {
                     self.cityLabel.text = locationName
                     self.weatherDetail.getData {
                                        DispatchQueue.main.async {
-                                           dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
-                                           let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
-                                           //self.dataLabel.text = dateFormatter.string(from: usableDate)
+                                        self.dateAndTimeLabel.text = self.weatherDetail.currentTime
                                           self.weatherLabel.text = self.weatherDetail.summary
                                            self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                                           self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
@@ -197,6 +192,8 @@ class ViewController: UIViewController {
 
 extension ViewController: GMSAutocompleteViewControllerDelegate {
     
+    
+    
     // Handle the user's selection.
     public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         var selectedCity = place.name?.urlEncoded ?? "UncnownLocation"
@@ -205,9 +202,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                          self.cityLabel.text = place.name
         weatherDetail.getData {
                      DispatchQueue.main.async {
-                         dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
-                         let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
-                         //self.dataLabel.text = dateFormatter.string(from: usableDate)
+                        self.dateAndTimeLabel.text = self.weatherDetail.currentTime
                         self.weatherLabel.text = self.weatherDetail.summary
                          self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                         self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))

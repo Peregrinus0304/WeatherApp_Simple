@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4502D93F2559D3E000935EA5 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502D93E2559D3E000935EA5 /* DailyCollectionViewCell.swift */; };
+		4502D9412563207700935EA5 /* CustomBlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502D9402563207700935EA5 /* CustomBlurredView.swift */; };
 		4546837F254DC5C600A35BAD /* WeatherLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546837E254DC5C600A35BAD /* WeatherLocation.swift */; };
 		45468382254DC63000A35BAD /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45468380254DC63000A35BAD /* HourlyWeather.swift */; };
 		45468383254DC63000A35BAD /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45468381254DC63000A35BAD /* DailyWeather.swift */; };
@@ -40,6 +41,7 @@
 		2518BCBC7961A35B5EDF494D /* Pods_WeatherApp_Simple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp_Simple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30461DA4955E44CA6D6866A0 /* Pods-WeatherApp_Simple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp_Simple.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp_Simple/Pods-WeatherApp_Simple.release.xcconfig"; sourceTree = "<group>"; };
 		4502D93E2559D3E000935EA5 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
+		4502D9402563207700935EA5 /* CustomBlurredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBlurredView.swift; sourceTree = "<group>"; };
 		4546837E254DC5C600A35BAD /* WeatherLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherLocation.swift; sourceTree = "<group>"; };
 		45468380254DC63000A35BAD /* HourlyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
 		45468381254DC63000A35BAD /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
@@ -90,6 +92,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4502D94325646CA300935EA5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4581A96A254ABB7600FF1AFA /* WeatherDetail.swift */,
+				4546837E254DC5C600A35BAD /* WeatherLocation.swift */,
+				45468381254DC63000A35BAD /* DailyWeather.swift */,
+				45468380254DC63000A35BAD /* HourlyWeather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4502D94425646D1400935EA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4581A962253CC51900FF1AFA /* HourlyTableViewCell.swift */,
+				4502D93E2559D3E000935EA5 /* DailyCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4581A93A2511388E00FF1AFA /* Gif images */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,21 +152,18 @@
 		45AC16C525095CE90008F0D1 /* WeatherApp_Simple */ = {
 			isa = PBXGroup;
 			children = (
-				45AC16C625095CE90008F0D1 /* AppDelegate.swift */,
-				45AC16C825095CE90008F0D1 /* SceneDelegate.swift */,
+				4502D94325646CA300935EA5 /* Model */,
+				4502D94425646D1400935EA5 /* View */,
 				45AC16CA25095CE90008F0D1 /* ViewController.swift */,
 				45AC16CC25095CE90008F0D1 /* Main.storyboard */,
-				4581A936251134C400FF1AFA /* GifExtension.swift */,
-				4581A93A2511388E00FF1AFA /* Gif images */,
-				4581A962253CC51900FF1AFA /* HourlyTableViewCell.swift */,
-				4502D93E2559D3E000935EA5 /* DailyCollectionViewCell.swift */,
-				4581A96A254ABB7600FF1AFA /* WeatherDetail.swift */,
-				4546837E254DC5C600A35BAD /* WeatherLocation.swift */,
-				45468381254DC63000A35BAD /* DailyWeather.swift */,
-				45468380254DC63000A35BAD /* HourlyWeather.swift */,
-				45AC16DA25095D1B0008F0D1 /* CustomButton.swift */,
-				45AC16CF25095CEE0008F0D1 /* Assets.xcassets */,
 				45AC16D125095CEE0008F0D1 /* LaunchScreen.storyboard */,
+				4581A93A2511388E00FF1AFA /* Gif images */,
+				4502D9402563207700935EA5 /* CustomBlurredView.swift */,
+				45AC16DA25095D1B0008F0D1 /* CustomButton.swift */,
+				4581A936251134C400FF1AFA /* GifExtension.swift */,
+				45AC16CF25095CEE0008F0D1 /* Assets.xcassets */,
+				45AC16C825095CE90008F0D1 /* SceneDelegate.swift */,
+				45AC16C625095CE90008F0D1 /* AppDelegate.swift */,
 				45AC16D425095CEE0008F0D1 /* Info.plist */,
 			);
 			path = WeatherApp_Simple;
@@ -286,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4502D9412563207700935EA5 /* CustomBlurredView.swift in Sources */,
 				4581A96B254ABB7600FF1AFA /* WeatherDetail.swift in Sources */,
 				4581A963253CC51900FF1AFA /* HourlyTableViewCell.swift in Sources */,
 				45468383254DC63000A35BAD /* DailyWeather.swift in Sources */,
