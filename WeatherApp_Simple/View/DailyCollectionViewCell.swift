@@ -14,6 +14,7 @@ class DailyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var minDailyTempLabel: UILabel!
     @IBOutlet weak var maxDailyTempLabel: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
