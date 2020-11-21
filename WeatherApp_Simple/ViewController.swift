@@ -280,6 +280,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
         if dataReceived == true {
             return weatherDetail.dailyWeatherData.count
         } else {
+            
             return 1
         }
     }
