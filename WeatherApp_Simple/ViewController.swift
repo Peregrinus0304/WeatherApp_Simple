@@ -156,7 +156,8 @@ extension ViewController: CLLocationManagerDelegate {
                     self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                     self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
                     self.dataReceived = true
-                    self.hourlyTableView.reloadData()
+                    //self.hourlyTableView.reloadData()
+                    self.hourlyTableView.reloadWithAnimation()
                     self.dailyCollectionView.reloadData()
                 }
             }
@@ -198,7 +199,8 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                 self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                 self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
                 self.dataReceived = true
-                self.hourlyTableView.reloadData()
+                //self.hourlyTableView.reloadData()
+                self.hourlyTableView.reloadWithAnimation()
                 self.dailyCollectionView.reloadData()
             }
         }
@@ -250,6 +252,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+   // Animating UIYableView reload
+}
+
+extension UITableView {
+    func reloadWithAnimation() {
+        self.reloadData()
+        let tableViewHeight = self.bounds.size.height
+        let cells = self.visibleCells
+        var delayCounter = 0
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        for cell in cells {
+            UIView.animate(withDuration: 1.6, delay: 0.08 * Double(delayCounter),usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
+    }
 }
 
 // MARK: - DailyCollectionView protocols
@@ -265,7 +287,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyCollectionViewCell
         cell.layer.cornerRadius = 15
-        
+        cell.layer.borderColor = UIColor.customNavy.cgColor
         
         cell.layer.borderWidth = 3
         
@@ -303,7 +325,7 @@ func setUpBackground(IconID: String) -> String {
             gifTitle = "snow night"
         case "50d":
             gifTitle = "mist"
-        case "50d":
+        case "50n":
             gifTitle = "mist night"
         default:
             gifTitle = "default weather"
