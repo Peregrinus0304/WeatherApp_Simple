@@ -9,23 +9,24 @@
 import UIKit
 
 class CustomButton: UIButton {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         layer.borderWidth = 3
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         titleLabel?.adjustsFontForContentSizeCategory = true
+        
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = 15
         layer.borderColor = isEnabled ? tintColor.cgColor : UIColor.lightGray.cgColor
     }
-
+    
     func animate() {
- let pulse = CASpringAnimation(keyPath: "transform.scale")
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
         pulse.duration = 0.4
         pulse.fromValue = 0.98
         pulse.toValue = 1.0

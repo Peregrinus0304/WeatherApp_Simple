@@ -9,7 +9,7 @@
 import Foundation
 
 struct DailyWeather {
-   var dailyDateAndTime: String
-   var dailyMinTemp: Int
-   var dailyMaxTemp: Int
+    var dailyDateAndTime: String
+    var dailyMinTemp: Int
+    var dailyMaxTemp: Int
 }

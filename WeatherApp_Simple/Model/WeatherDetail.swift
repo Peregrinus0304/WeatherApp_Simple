@@ -9,6 +9,8 @@
 
 import Foundation
 
+//MARK: Date formatter
+
 private let dateFormatter: DateFormatter = {
     let  dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE"
@@ -31,19 +33,19 @@ class WeatherDetail: WeatherLocation{
         var hourly: [Hourly]
     }
     
-   private struct Current: Codable {
+    private struct Current: Codable {
         var dt: TimeInterval
         var temp: Double
         var weather: [Weather]
     }
     
-   private struct Weather:Codable {
+    private struct Weather:Codable {
         var description: String
         var icon: String
         var id: Int
     }
     
-   private struct Daily: Codable {
+    private struct Daily: Codable {
         var dt: TimeInterval
         var temp: Temp
         var weather: [Weather]
@@ -55,12 +57,12 @@ class WeatherDetail: WeatherLocation{
         var weather: [Weather]
     }
     
-   private struct Temp: Codable {
+    private struct Temp: Codable {
         var max: Double
         var min: Double
     }
     
-//MARK: - Reference
+    //MARK: - Reference
     
     var currentTime = ""
     var temperature = 0
@@ -69,28 +71,28 @@ class WeatherDetail: WeatherLocation{
     var timezone = ""
     var dailyWeatherData: [DailyWeather] = []
     var hourlyWeatherData: [HourlyWeather?] = []
-        
-//MARK: - Parsing
+    
+    //MARK: - Parsing
     
     func getData(completed: @escaping () -> ()){
-       let openWeatherMapAPIKey = "13ca86f4093bca85ed6083e5802a8414"
+        let openWeatherMapAPIKey = "13ca86f4093bca85ed6083e5802a8414"
         let urlString =
         "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=minutely&units=imperial&lang=ua&appid=\(openWeatherMapAPIKey)"
         print(urlString)
-    
-    // create a URL
+        
+        // create a URL
         guard let url = URL(string: urlString) else {
             print("No data")
-        return
+            return
         }
-    
-    // Create session
+        
+        // Create session
         let session = URLSession.shared
-    
-    // Get data with .dataTask method
+        
+        // Get data with .dataTask method
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error{
-            print("ERROR!\(error.localizedDescription)")
+                print("ERROR!\(error.localizedDescription)")
             }
             do {
                 let result = try JSONDecoder().decode(Result.self, from: data!)
@@ -113,7 +115,7 @@ class WeatherDetail: WeatherLocation{
                     self.dailyWeatherData.append(dailyWeather)
                 }
                 let lastHour = min(24, result.hourly.count)
-               if lastHour > 0 {
+                if lastHour > 0 {
                     for index in 0..<result.hourly.count {
                         let hourlyDay = Date(timeIntervalSince1970: result.hourly[index].dt)
                         hourlyFormatter.timeZone = TimeZone(identifier: result.timezone)
@@ -127,7 +129,7 @@ class WeatherDetail: WeatherLocation{
                 }
                 print(result)
             } catch {
-            print("ERROR: \(error.localizedDescription)")
+                print("ERROR: \(error.localizedDescription)")
             }
             completed()
         }
@@ -142,4 +144,5 @@ class WeatherDetail: WeatherLocation{
         
         return celsius
     }
+    
 }

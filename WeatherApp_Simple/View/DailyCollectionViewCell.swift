@@ -9,16 +9,12 @@
 import UIKit
 
 class DailyCollectionViewCell: UICollectionViewCell {
-  
+   
+    //MARK: - IBOutlet
+    
     @IBOutlet weak var weekdayNameLabel: UILabel!
     @IBOutlet weak var minDailyTempLabel: UILabel!
     @IBOutlet weak var maxDailyTempLabel: UILabel!
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     var dailyWeather: DailyWeather! {
         didSet{
@@ -27,6 +23,5 @@ class DailyCollectionViewCell: UICollectionViewCell {
             maxDailyTempLabel.text = "max:\(dailyWeather.dailyMaxTemp)°"
         }
     }
-    
     
 }

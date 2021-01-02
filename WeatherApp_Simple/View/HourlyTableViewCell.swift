@@ -9,26 +9,19 @@
 import UIKit
 
 class HourlyTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var hourlyImageView: UIImageView!
     @IBOutlet weak var hourlyDateAndTimeLabel: UILabel!
     @IBOutlet weak var hourlyWeatherDescriptionTextView: UITextView!
     @IBOutlet weak var hourlyTempLabel: UILabel!
-
     
-        var hourlyWeather: HourlyWeather! {
-            didSet{
-                hourlyImageView.image = UIImage(named: hourlyWeather.hourlyIcon)
-                hourlyDateAndTimeLabel.text = hourlyWeather.hour
-                hourlyWeatherDescriptionTextView.text = hourlyWeather.hourlySummary
-                hourlyTempLabel.text = "\(hourlyWeather.hourlyTemp)°"
-              
-                   }
-            }
-        
-        override func awakeFromNib() {
-            super.awakeFromNib()
-            // Initialization code
+    var hourlyWeather: HourlyWeather! {
+        didSet{
+            hourlyImageView.image = UIImage(named: hourlyWeather.hourlyIcon)
+            hourlyDateAndTimeLabel.text = hourlyWeather.hour
+            hourlyWeatherDescriptionTextView.text = hourlyWeather.hourlySummary
+            hourlyTempLabel.text = "\(hourlyWeather.hourlyTemp)°"
         }
-
     }
+    
+}

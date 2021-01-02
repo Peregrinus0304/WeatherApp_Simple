@@ -31,18 +31,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var hourlyTableView: UITableView!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
+    //MARK: - Properties
+    
     var weatherDetail: WeatherDetail!
     var locationManager:CLLocationManager!
     var dataReceived = false
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getLocation()
-        hourlyTableView.delegate = self
-        hourlyTableView.dataSource = self
-        dailyCollectionView.delegate = self
-        dailyCollectionView.dataSource = self
         searchButton.animate()
         
         // Initialize UI
@@ -77,7 +77,6 @@ class ViewController: UIViewController {
     
     @IBAction func searchPressed(_ sender: CustomButton) {
         autocompleteClicked(sender)
-        
     }
     
     func showSimpleAlert(title: String, message: String) {
@@ -98,8 +97,8 @@ class ViewController: UIViewController {
             completion: nil
         )
     }
+    
 }
-
 
 // MARK: - CLLocationManagerDelegate
 
@@ -113,7 +112,6 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-            
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
             case .restricted:
@@ -143,7 +141,7 @@ extension ViewController: CLLocationManagerDelegate {
                 let placeMark = placeMarks?.last
                 locationName = placeMark?.name ?? ""
             } else {
-                locationName = "Не можу знайти міцезнаходження"
+                locationName = "Can`t find location"
             }
             print(currentLocation)
             self.weatherDetail = WeatherDetail(name: locationName, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
@@ -178,8 +176,8 @@ extension ViewController: CLLocationManagerDelegate {
             return
         }
     }
+    
 }
-
 
 //MARK: - AutocompleteViewController Delegate
 
@@ -187,7 +185,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        var selectedCity = place.name?.urlEncoded ?? "UncnownLocation"
+        let selectedCity = place.name?.urlEncoded ?? "UncnownLocation"
         weatherDetail = WeatherDetail(name: selectedCity, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         dismiss(animated: true, completion: nil)
         self.cityLabel.text = place.name
@@ -224,19 +222,17 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
+    
 }
 
 
 // MARK: - HourlyTableView protocols
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataReceived == true ? weatherDetail.hourlyWeatherData.count : 1
         
-        if dataReceived == true {
-            return weatherDetail.hourlyWeatherData.count
-        } else {
-            return 1
-        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -253,9 +249,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
     
-   // Animating UIYableView reload
 }
 
+// Animating UITableView reload
 extension UITableView {
     func reloadWithAnimation() {
         self.reloadData()
@@ -272,24 +268,21 @@ extension UITableView {
             delayCounter += 1
         }
     }
+    
 }
 
 // MARK: - DailyCollectionView protocols
+
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if dataReceived == true {
-            return weatherDetail.dailyWeatherData.count
-        } else {
-            
-            return 1
-        }
+        
+        dataReceived == true ? weatherDetail.dailyWeatherData.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyCell", for: indexPath) as! DailyCollectionViewCell
         cell.layer.cornerRadius = 15
         cell.layer.borderColor = UIColor.customNavy.cgColor
-        
         cell.layer.borderWidth = 3
         
         if dataReceived == true {
@@ -332,8 +325,8 @@ func setUpBackground(IconID: String) -> String {
             gifTitle = "default weather"
     }
     return gifTitle
+    
 }
-
 
 //MARK: - String encoding
 
@@ -344,7 +337,10 @@ extension String {
     var urlEncoded: String {
         return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
+    
 }
+
+//MARK: - Custom colors
 
 extension UIColor {
     class var customNavy:UIColor {
@@ -353,6 +349,5 @@ extension UIColor {
     class var customPurpule:UIColor {
         return UIColor(red: 76.0/255.0, green: 0.0/255.0, blue: 153.0/255.0, alpha: 1.0)
     }
+    
 }
-
-
