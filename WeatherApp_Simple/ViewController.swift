@@ -50,12 +50,31 @@ class ViewController: UIViewController {
     
     
     //MARK: - Initialize UI
+   
     func createUI() {
         cityLabel.text = ""
         weatherLabel.text = ""
         temperatureLabel.text = ""
         dateAndTimeLabel.text = ""
         weatherImageView.loadGif(name: "default weather")
+    }
+    
+    //MARK: - Getting data and updating UI
+    
+    func updateUI() {
+        self.weatherDetail.getData {
+                     DispatchQueue.main.async {
+                         self.dateAndTimeLabel.text = self.weatherDetail.currentTime
+                         self.weatherLabel.text = self.weatherDetail.summary
+                         self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
+                         self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
+                         self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
+                         
+                       
+                         self.hourlyTableView.reloadWithAnimation()
+                         self.dailyCollectionView.reloadData()
+                     }
+                 }
     }
     
     
@@ -149,19 +168,7 @@ extension ViewController: CLLocationManagerDelegate {
             print(currentLocation)
             self.weatherDetail = WeatherDetail(name: locationName, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
             self.cityLabel.text = locationName
-            self.weatherDetail.getData {
-                DispatchQueue.main.async {
-                    self.dateAndTimeLabel.text = self.weatherDetail.currentTime
-                    self.weatherLabel.text = self.weatherDetail.summary
-                    self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
-                    self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
-                    self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-                    
-                    //self.hourlyTableView.reloadData()
-                    self.hourlyTableView.reloadWithAnimation()
-                    self.dailyCollectionView.reloadData()
-                }
-            }
+            self.updateUI()
         }
     }
     
@@ -194,19 +201,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         weatherDetail = WeatherDetail(name: selectedCity, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         dismiss(animated: true, completion: nil)
         self.cityLabel.text = place.name
-        weatherDetail.getData {
-            DispatchQueue.main.async {
-                self.dateAndTimeLabel.text = self.weatherDetail.currentTime
-                self.weatherLabel.text = self.weatherDetail.summary
-                self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
-                self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
-                self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-               
-                //self.hourlyTableView.reloadData()
-                self.hourlyTableView.reloadWithAnimation()
-                self.dailyCollectionView.reloadData()
-            }
-        }
+        self.updateUI()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
