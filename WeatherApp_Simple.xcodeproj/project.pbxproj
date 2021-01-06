@@ -34,6 +34,8 @@
 		45AC16D025095CEE0008F0D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45AC16CF25095CEE0008F0D1 /* Assets.xcassets */; };
 		45AC16D325095CEE0008F0D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45AC16D125095CEE0008F0D1 /* LaunchScreen.storyboard */; };
 		45AC16DB25095D1B0008F0D1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16DA25095D1B0008F0D1 /* CustomButton.swift */; };
+		45D0D17825A5F1F2006B163D /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0D17725A5F1F2006B163D /* ExtensionString.swift */; };
+		45D0D17A25A5F230006B163D /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0D17925A5F230006B163D /* ExtensionUIColor.swift */; };
 		B50C3A8E2FFC337AF6EBC51C /* Pods_WeatherApp_Simple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2518BCBC7961A35B5EDF494D /* Pods_WeatherApp_Simple.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		45AC16D225095CEE0008F0D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45AC16D425095CEE0008F0D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45AC16DA25095D1B0008F0D1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		45D0D17725A5F1F2006B163D /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
+		45D0D17925A5F230006B163D /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		FDA5ED6369709053749D6B11 /* Pods-WeatherApp_Simple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp_Simple.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp_Simple/Pods-WeatherApp_Simple.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +159,8 @@
 				4502D94325646CA300935EA5 /* Model */,
 				4502D94425646D1400935EA5 /* View */,
 				45AC16CA25095CE90008F0D1 /* ViewController.swift */,
+				45D0D17925A5F230006B163D /* ExtensionUIColor.swift */,
+				45D0D17725A5F1F2006B163D /* ExtensionString.swift */,
 				45AC16CC25095CE90008F0D1 /* Main.storyboard */,
 				45AC16D125095CEE0008F0D1 /* LaunchScreen.storyboard */,
 				4581A93A2511388E00FF1AFA /* Gif images */,
@@ -310,6 +316,8 @@
 				4581A963253CC51900FF1AFA /* HourlyTableViewCell.swift in Sources */,
 				45468383254DC63000A35BAD /* DailyWeather.swift in Sources */,
 				45AC16DB25095D1B0008F0D1 /* CustomButton.swift in Sources */,
+				45D0D17A25A5F230006B163D /* ExtensionUIColor.swift in Sources */,
+				45D0D17825A5F1F2006B163D /* ExtensionString.swift in Sources */,
 				4502D93F2559D3E000935EA5 /* DailyCollectionViewCell.swift in Sources */,
 				4581A937251134C400FF1AFA /* GifExtension.swift in Sources */,
 				45AC16CB25095CE90008F0D1 /* ViewController.swift in Sources */,

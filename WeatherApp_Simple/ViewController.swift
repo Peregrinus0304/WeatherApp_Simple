@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     
     var weatherDetail: WeatherDetail!
     var locationManager:CLLocationManager!
-    var dataReceived = false
+    
     
     //MARK: - Lifecycle
     
@@ -156,7 +156,7 @@ extension ViewController: CLLocationManagerDelegate {
                     self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                     self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                     self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-                    self.dataReceived = true
+                    
                     //self.hourlyTableView.reloadData()
                     self.hourlyTableView.reloadWithAnimation()
                     self.dailyCollectionView.reloadData()
@@ -201,7 +201,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                 self.temperatureLabel.text = "\(self.weatherDetail.temperature)°"
                 self.weatherImageView.loadGif(name: setUpBackground(IconID: self.weatherDetail.dayIcon))
                 self.weatherIconImageView.image = UIImage(named: self.weatherDetail.dayIcon)
-                self.dataReceived = true
+               
                 //self.hourlyTableView.reloadData()
                 self.hourlyTableView.reloadWithAnimation()
                 self.dailyCollectionView.reloadData()
@@ -236,17 +236,15 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataReceived == true ? weatherDetail.hourlyWeatherData.count : 1
+         weatherDetail?.hourlyWeatherData.count ??  0
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = hourlyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HourlyTableViewCell
         
-        if dataReceived == true {
-            cell.hourlyWeather = weatherDetail.hourlyWeatherData[indexPath.row] } else {
-            return cell
-        }
+    
+            cell.hourlyWeather = weatherDetail.hourlyWeatherData[indexPath.row]
         return cell
     }
     
@@ -281,7 +279,7 @@ extension UITableView {
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        dataReceived == true ? weatherDetail.dailyWeatherData.count : 1
+       weatherDetail?.dailyWeatherData.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -290,10 +288,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.layer.borderColor = UIColor.customNavy.cgColor
         cell.layer.borderWidth = 3
         
-        if dataReceived == true {
-            cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row] } else{
-            return cell
-        }
+
+            cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row]
+    
+        
         return cell
     }
 }
@@ -333,26 +331,6 @@ func setUpBackground(IconID: String) -> String {
     
 }
 
-//MARK: - String encoding
 
-extension String {
-    
-    // A handy method for %-encoding strings containing spaces and other
-    // characters that need to be converted for use in URLs.
-    var urlEncoded: String {
-        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-    }
-    
-}
 
-//MARK: - Custom colors
 
-extension UIColor {
-    class var customNavy:UIColor {
-        return UIColor(red: 177.0/255.0, green: 234.0/255.0, blue: 249.0/255.0, alpha: 1.0)
-    }
-    class var customPurpule:UIColor {
-        return UIColor(red: 76.0/255.0, green: 0.0/255.0, blue: 153.0/255.0, alpha: 1.0)
-    }
-    
-}
