@@ -44,14 +44,18 @@ class ViewController: UIViewController {
         
         getLocation()
         searchButton.animate()
+        createUI()
         
-        // Initialize UI
+    }
+    
+    
+    //MARK: - Initialize UI
+    func createUI() {
         cityLabel.text = ""
         weatherLabel.text = ""
         temperatureLabel.text = ""
         dateAndTimeLabel.text = ""
         weatherImageView.loadGif(name: "default weather")
-        
     }
     
     
@@ -100,9 +104,8 @@ class ViewController: UIViewController {
     
 }
 
-// MARK: - CLLocationManagerDelegate
-
 extension ViewController: CLLocationManagerDelegate {
+        
     
     func getLocation() {
         locationManager = CLLocationManager()
@@ -178,6 +181,8 @@ extension ViewController: CLLocationManagerDelegate {
     }
     
 }
+
+
 
 //MARK: - AutocompleteViewController Delegate
 
