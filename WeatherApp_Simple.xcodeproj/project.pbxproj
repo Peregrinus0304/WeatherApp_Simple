@@ -159,20 +159,28 @@
 				4502D94325646CA300935EA5 /* Model */,
 				4502D94425646D1400935EA5 /* View */,
 				45AC16CA25095CE90008F0D1 /* ViewController.swift */,
-				45D0D17925A5F230006B163D /* ExtensionUIColor.swift */,
-				45D0D17725A5F1F2006B163D /* ExtensionString.swift */,
 				45AC16CC25095CE90008F0D1 /* Main.storyboard */,
 				45AC16D125095CEE0008F0D1 /* LaunchScreen.storyboard */,
+				45D0D18025A661B9006B163D /* Extensions */,
 				4581A93A2511388E00FF1AFA /* Gif images */,
 				4502D9402563207700935EA5 /* CustomBlurredView.swift */,
 				45AC16DA25095D1B0008F0D1 /* CustomButton.swift */,
-				4581A936251134C400FF1AFA /* GifExtension.swift */,
 				45AC16CF25095CEE0008F0D1 /* Assets.xcassets */,
 				45AC16C825095CE90008F0D1 /* SceneDelegate.swift */,
 				45AC16C625095CE90008F0D1 /* AppDelegate.swift */,
 				45AC16D425095CEE0008F0D1 /* Info.plist */,
 			);
 			path = WeatherApp_Simple;
+			sourceTree = "<group>";
+		};
+		45D0D18025A661B9006B163D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				45D0D17925A5F230006B163D /* ExtensionUIColor.swift */,
+				45D0D17725A5F1F2006B163D /* ExtensionString.swift */,
+				4581A936251134C400FF1AFA /* GifExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A57B7D4F8FCC7051B58E6FB8 /* Pods */ = {

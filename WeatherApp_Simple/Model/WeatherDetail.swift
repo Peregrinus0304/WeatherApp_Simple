@@ -99,7 +99,8 @@ class WeatherDetail: WeatherLocation{
                 self.timezone = result.timezone
                 let unformattedDateAndTime = Date(timeIntervalSince1970: result.current.dt)
                 self.currentTime = hourlyFormatter.string(from: unformattedDateAndTime)
-                self.temperature = self.calculateCelsius(fahrenheit: result.current.temp.rounded())
+                self.temperature = self.calculateCelsius(fahrenheit:
+                result.current.temp.rounded())
                 self.summary = result.current.weather[0].description
                 self.dayIcon = result.current.weather[0].icon
                 for index in 0..<result.daily.count {

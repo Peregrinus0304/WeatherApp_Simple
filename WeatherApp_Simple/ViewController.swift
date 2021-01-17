@@ -11,12 +11,6 @@ import GooglePlaces
 import CoreLocation
 
 
-private let dateFormatter: DateFormatter = {
-    let  dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE, MMM d, h:mm aaa"
-    return dateFormatter
-}()
-
 class ViewController: UIViewController {
     
     //MARK: - Outlets
@@ -122,6 +116,8 @@ class ViewController: UIViewController {
     }
     
 }
+
+ //MARK: - LocationManager
 
 extension ViewController: CLLocationManagerDelegate {
         
@@ -283,10 +279,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
         cell.layer.borderColor = UIColor.customNavy.cgColor
         cell.layer.borderWidth = 3
         
-
             cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row]
     
-        
         return cell
     }
 }
