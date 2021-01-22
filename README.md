@@ -5,3 +5,4 @@ Classic mobile weather application. I used free OpenWeather API with option to l
  - use Google autocomplete search with Google Places API
  - use UI animations
  
+![WeatherApp_first](https://user-images.githubusercontent.com/61435691/105550797-1e069e00-5d02-11eb-9a5b-6d85d3b58281.png)
