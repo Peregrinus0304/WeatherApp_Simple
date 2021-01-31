@@ -6,5 +6,4 @@ Classic mobile weather application. I used free OpenWeather API with option to l
  - use UI animations
  
 ![WeatherApp_first](https://user-images.githubusercontent.com/61435691/105550797-1e069e00-5d02-11eb-9a5b-6d85d3b58281.png)
-
-https://user-images.githubusercontent.com/61435691/105550869-3a0a3f80-5d02-11eb-810f-b90ad52d6db9.mov
+![weatherGIf](https://user-images.githubusercontent.com/61435691/106387274-56306f80-63d9-11eb-8db5-5bd8770eb4b5.gif)
